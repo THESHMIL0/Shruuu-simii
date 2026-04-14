@@ -11,7 +11,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            /* Prevents the annoying blue tap flash on mobile */
             -webkit-tap-highlight-color: transparent; 
         }
 
@@ -42,7 +41,6 @@
             transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1), opacity 1s ease;
             will-change: transform, opacity;
             
-            /* Stops the phone from trying to copy/highlight text when dragging */
             user-select: none;
             -webkit-user-select: none;
             -webkit-touch-callout: none;
@@ -60,6 +58,30 @@
             100% { background-position: 0% 50%; }
         }
 
+        /* Cute floating background elements for the start page */
+        #floating-bg-elements {
+            position: absolute;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+            transition: opacity 0.5s ease;
+        }
+
+        .bg-cute {
+            position: absolute;
+            opacity: 0.6;
+            animation: driftUp linear infinite;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        }
+
+        @keyframes driftUp {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+        }
+
         .glass-panel {
             background: rgba(255, 255, 255, 0.15); 
             backdrop-filter: blur(15px);
@@ -73,6 +95,23 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* The kitty peeking over the glass panel */
+        .peeking-cat {
+            position: absolute;
+            top: -45px;
+            font-size: 3.5rem;
+            animation: peek 4s infinite ease-in-out;
+            z-index: 5;
+            filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1));
+        }
+
+        @keyframes peek {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(5deg); }
         }
 
         .intro-title {
@@ -103,9 +142,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            cursor: grab; /* Shows a grab hand on desktop */
+            cursor: grab; 
             animation: gentleFloat 2.5s infinite ease-in-out;
-            /* Stops browser from scrolling the page when you drag this */
             touch-action: none; 
         }
 
@@ -319,7 +357,11 @@
     </audio>
 
     <div id="intro-screen">
+        <div id="floating-bg-elements"></div>
+
         <div class="glass-panel">
+            <div class="peeking-cat">🐱</div>
+
             <h2 class="intro-title">Shree &<br>Shimi</h2>
             <p class="intro-text">Ready to unlock our world?</p>
             
@@ -330,7 +372,6 @@
                 </div>
                 <div class="pull-hint">Pull me down! 👇</div>
             </div>
-            
         </div>
     </div>
 
@@ -376,10 +417,28 @@
             Send a Virtual Hug! 🤗
         </button>
 
-        <p class="dev-credit" id="credit-text">Made by Theshmil only 😸</p>
+        <p class="dev-credit" id="credit-text">Made by a cute cat 🐾</p>
     </div>
 
     <script>
+        // --- SPAWN CUTE BACKGROUND ELEMENTS ---
+        const bgContainer = document.getElementById('floating-bg-elements');
+        const cuteEmojis = ['✨', '💖', '🌸', '☁️', '🎀', '🦋'];
+        
+        for (let i = 0; i < 20; i++) {
+            let el = document.createElement('div');
+            el.innerHTML = cuteEmojis[Math.floor(Math.random() * cuteEmojis.length)];
+            el.className = 'bg-cute';
+            // Random horizontal placement
+            el.style.left = Math.random() * 100 + 'vw';
+            // Random sizing
+            el.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+            // Random speed & delay so they don't all move together
+            el.style.animationDuration = (Math.random() * 8 + 8) + 's';
+            el.style.animationDelay = (Math.random() * 10) + 's';
+            bgContainer.appendChild(el);
+        }
+
         // --- REAL PHYSICS DRAG SYSTEM ---
         const thread = document.getElementById('thread');
         let startY = 0;
@@ -389,30 +448,21 @@
         function handleDragStart(e) {
             if (isPulled) return;
             isDragging = true;
-            // Get finger or mouse Y position
             startY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
-            
-            // Stop the CSS float animation so it instantly follows your finger
             thread.style.transition = 'none';
             thread.style.animation = 'none';
         }
 
         function handleDragMove(e) {
             if (!isDragging || isPulled) return;
-            e.preventDefault(); // Stop the phone screen from scrolling
-
+            e.preventDefault(); 
             const currentY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
             const distance = currentY - startY;
 
-            // Only allow dragging downwards
             if (distance > 0) {
-                // Resistance math: it gets slightly harder to pull the further down you go
                 const pullDistance = Math.min(distance * 0.5, 80);
-                
-                // Move it down and shrink slightly like a taut string
                 thread.style.transform = `translateY(${pullDistance}px) scale(${1 - pullDistance * 0.002})`;
 
-                // THRESHOLD MET: They pulled it far enough! Boom!
                 if (pullDistance >= 65) {
                     isPulled = true;
                     isDragging = false;
@@ -424,31 +474,27 @@
         function handleDragEnd() {
             if (!isDragging || isPulled) return;
             isDragging = false;
-            
-            // SNAPPING BACK: They let go too early, snap it back to the top
             thread.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
             thread.style.transform = 'translateY(0) scale(1)';
-            
-            // Restart the floating animation after it snaps back
             setTimeout(() => {
                 if (!isPulled) thread.style.animation = 'gentleFloat 2.5s infinite ease-in-out';
             }, 500);
         }
 
-        // Attach event listeners for both Mouse (computer) and Touch (mobile)
         thread.addEventListener('mousedown', handleDragStart);
         thread.addEventListener('mousemove', handleDragMove);
         window.addEventListener('mouseup', handleDragEnd);
-
         thread.addEventListener('touchstart', handleDragStart, { passive: false });
         thread.addEventListener('touchmove', handleDragMove, { passive: false });
         window.addEventListener('touchend', handleDragEnd);
 
         // --- THE MAIN DIRECTOR ---
         function executePull() {
-            // Give it one final satisfying snap down before diving into the site
             thread.style.transition = 'transform 0.2s ease-in';
             thread.style.transform = "translateY(100px) scale(0.8)";
+            
+            // Fade out the background cute items
+            bgContainer.style.opacity = '0';
             
             setTimeout(() => {
                 const music = document.getElementById('bg-music');
@@ -499,12 +545,10 @@
             const item = document.createElement('div');
             item.innerHTML = travelEmojis[Math.floor(Math.random() * travelEmojis.length)];
             item.className = 'travel-item';
-            
             const angle = Math.random() * Math.PI * 2;
             const distance = 80 + Math.random() * 40; 
             item.style.setProperty('--end-x', Math.cos(angle) * distance + 'vw');
             item.style.setProperty('--end-y', Math.sin(angle) * distance + 'vh');
-            
             cloudContainer.appendChild(item);
             setTimeout(() => item.remove(), 2000); 
         }
