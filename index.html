@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Shree & Shimi 4Ever 👯‍♀️</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Caveat:wght@700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&family=Caveat:wght@700&display=swap');
 
         * {
             margin: 0;
@@ -14,52 +14,26 @@
         }
 
         body {
-            background-color: #ffe6ea;
+            background-color: #fff0f3; /* Softer, warmer pink base */
             font-family: 'Quicksand', sans-serif;
             color: #5a4a4d;
             text-align: center;
             overflow-x: hidden; 
-            overflow-y: hidden; /* Prevent scrolling during the journey */
+            overflow-y: hidden; 
+            -webkit-tap-highlight-color: transparent; /* Removes blue tap highlight on mobile */
         }
 
         /* ✨ INTRO SCREEN ✨ */
         #intro-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: linear-gradient(-45deg, #ff9a9e, #fecfef, #fbc2eb, #a18cd1);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background-size: 400% 400%; animation: gradientBG 15s ease infinite;
+            z-index: 100; display: flex; align-items: center; justify-content: center;
             transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 1.2s ease, filter 1.2s ease;
-            overflow: hidden;
         }
 
         #intro-screen.pulled {
-            transform: scale(2.5);
-            opacity: 0;
-            filter: blur(10px);
-            pointer-events: none;
-        }
-
-        .bg-bubble {
-            position: absolute;
-            bottom: -100px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            animation: riseUp 10s infinite ease-in;
-            pointer-events: none;
-        }
-
-        @keyframes riseUp {
-            0% { transform: translateY(0) scale(0.5); opacity: 0; }
-            50% { opacity: 1; }
-            100% { transform: translateY(-120vh) scale(1.5); opacity: 0; }
+            transform: scale(3); opacity: 0; filter: blur(15px); pointer-events: none;
         }
 
         @keyframes gradientBG {
@@ -69,252 +43,226 @@
         }
 
         .glass-panel {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 30px;
-            padding: 40px 30px;
-            width: 85vw;
-            max-width: 400px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            z-index: 10;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            border-radius: 40px; padding: clamp(30px, 8vw, 50px) clamp(20px, 5vw, 40px);
+            width: 90vw; max-width: 380px;
+            box-shadow: 0 20px 40px rgba(255, 133, 162, 0.2);
+            display: flex; flex-direction: column; align-items: center;
         }
 
         .intro-title {
             font-family: 'Caveat', cursive;
-            font-size: 4.5rem;
-            color: #fff;
-            line-height: 1.1;
-            text-shadow: 2px 2px 8px rgba(255, 133, 162, 0.5);
-            margin-bottom: 10px;
+            font-size: clamp(3.5rem, 12vw, 5rem); /* Fluid font size for mobile */
+            color: #fff; line-height: 1.1;
+            text-shadow: 2px 2px 10px rgba(255, 133, 162, 0.6);
+            margin-bottom: 5px;
         }
 
         .intro-text {
-            font-family: 'Quicksand', sans-serif;
-            font-weight: bold;
-            font-size: 1.1rem;
-            color: #fff;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
+            font-weight: 700; font-size: clamp(1rem, 4vw, 1.2rem);
+            color: #fff; text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
+            margin-bottom: 25px;
         }
 
         .thread-wrapper { position: relative; margin-top: 10px; }
 
         .thread-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-            animation: gentleFloat 2.5s infinite ease-in-out;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex; flex-direction: column; align-items: center;
+            cursor: pointer; animation: gentleFloat 2s infinite ease-in-out;
         }
 
         .thread-line {
-            width: 4px;
-            height: 80px;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.2), rgba(255,255,255,1));
-            border-radius: 5px;
+            width: 5px; height: clamp(60px, 15vh, 90px);
+            background: linear-gradient(to bottom, rgba(255,255,255,0.1), rgba(255,255,255,1));
+            border-radius: 10px;
         }
 
         .thread-heart {
-            font-size: 4.5rem;
-            margin-top: -10px;
-            filter: drop-shadow(0px 8px 10px rgba(255, 133, 162, 0.4));
-            transition: transform 0.2s;
+            font-size: clamp(4rem, 15vw, 5.5rem); margin-top: -15px;
+            filter: drop-shadow(0px 10px 15px rgba(255, 133, 162, 0.5));
         }
 
-        .thread-container:hover .thread-heart { transform: scale(1.1); }
-
         .pull-hint {
-            position: absolute;
-            right: -60px;
-            top: 50%;
-            background: #ff85a2;
-            color: white;
-            font-family: 'Caveat', cursive;
-            font-size: 1.5rem;
-            padding: 5px 15px;
-            border-radius: 20px;
-            box-shadow: 0 4px 10px rgba(255, 133, 162, 0.4);
-            animation: bounceLeft 1.5s infinite;
-            pointer-events: none;
+            position: absolute; right: -70px; top: 40%;
+            background: #fff; color: #ff85a2; font-family: 'Caveat', cursive;
+            font-size: 1.4rem; font-weight: bold; padding: 6px 16px;
+            border-radius: 20px; box-shadow: 0 8px 15px rgba(255, 133, 162, 0.3);
+            animation: bounceLeft 1.5s infinite; pointer-events: none;
         }
 
         .pull-hint::before {
-            content: ''; position: absolute; left: -8px; top: 50%;
-            transform: translateY(-50%); border-top: 8px solid transparent;
-            border-bottom: 8px solid transparent; border-right: 8px solid #ff85a2;
+            content: ''; position: absolute; left: -10px; top: 50%;
+            transform: translateY(-50%); border-width: 8px 12px 8px 0;
+            border-style: solid; border-color: transparent #fff transparent transparent;
         }
 
-        @keyframes gentleFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
-        @keyframes bounceLeft { 0%, 100% { transform: translateX(0) translateY(-50%); } 50% { transform: translateX(-10px) translateY(-50%); } }
+        @keyframes gentleFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(12px); } }
+        @keyframes bounceLeft { 0%, 100% { transform: translateX(0) translateY(-50%); } 50% { transform: translateX(-12px) translateY(-50%); } }
 
-        /* ✨ CLOUD TRAVEL SYSTEM ✨ */
+        /* ✨ CLOUD TRAVEL ✨ */
         #cloud-container {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             pointer-events: none; z-index: 5;
         }
 
         .travel-item {
-            position: absolute; top: 50%; left: 50%;
-            font-size: 3rem;
-            transform: translate(-50%, -50%) scale(0.1);
-            opacity: 0;
-            animation: cloudZoom 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
+            position: absolute; top: 50%; left: 50%; font-size: clamp(2.5rem, 8vw, 4rem);
+            transform: translate(-50%, -50%) scale(0.1); opacity: 0;
+            animation: cloudZoom 2.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
 
         @keyframes cloudZoom {
             0% { transform: translate(-50%, -50%) scale(0.1); opacity: 0; }
-            30% { opacity: 0.9; }
-            100% { transform: translate(calc(-50% + var(--end-x)), calc(-50% + var(--end-y))) scale(12); opacity: 0; filter: blur(8px); }
+            30% { opacity: 1; }
+            100% { transform: translate(calc(-50% + var(--end-x)), calc(-50% + var(--end-y))) scale(8); opacity: 0; filter: blur(10px); }
         }
 
         /* ✨ MAIN CONTENT ✨ */
-        #main-content {
-            padding: 10px; opacity: 0; display: none; 
-        }
-
+        #main-content { padding: 15px 10px; opacity: 0; display: none; }
         #main-content.visible { display: block; opacity: 1; }
 
-        header { margin-bottom: 30px; padding-top: 20px; height: 100px; /* reserve space */ }
+        header { margin-bottom: 25px; padding-top: 15px; min-height: 110px; }
 
         h1 {
-            font-size: 2.5rem; color: #ff85a2; text-shadow: 2px 2px #fff;
-            margin-bottom: 5px; min-height: 40px;
+            font-size: clamp(2.2rem, 8vw, 3rem);
+            /* Cute gradient text */
+            background: linear-gradient(45deg, #ff758c 0%, #ff7eb3 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 5px; min-height: 45px;
+            filter: drop-shadow(2px 2px 0px rgba(255, 255, 255, 0.8));
         }
 
         p.subtitle {
-            font-size: 1.1rem; font-weight: bold; color: #d16b86; min-height: 25px;
+            font-size: clamp(1rem, 3.5vw, 1.2rem); font-weight: 700; color: #d16b86; min-height: 25px;
         }
 
         .cursor {
-            display: inline-block; width: 4px; background-color: #ff85a2;
-            animation: blink 1s step-end infinite; margin-left: 5px; vertical-align: text-bottom;
+            display: inline-block; width: 4px; height: clamp(2rem, 8vw, 2.5rem); 
+            background-color: #ff85a2; animation: blink 1s step-end infinite; 
+            margin-left: 5px; vertical-align: bottom; border-radius: 2px;
         }
 
         @keyframes blink { 50% { opacity: 0; } }
 
         .photo-container {
             display: flex; align-items: center; justify-content: center;
-            gap: 2%; margin-bottom: 40px; flex-wrap: nowrap; width: 100%;
+            gap: 3%; margin-bottom: 40px; flex-wrap: nowrap; width: 100%;
             position: relative; z-index: 10;
         }
 
-        .anim-wrapper { opacity: 0; }
+        .anim-wrapper { opacity: 0; position: relative; }
+
+        /* 🎀 Washi Tape Effect */
+        .washi-tape {
+            position: absolute; top: -12px; left: 50%;
+            width: clamp(60px, 15vw, 80px); height: clamp(20px, 5vw, 25px);
+            background-color: rgba(255, 182, 193, 0.85); /* Semi-transparent pink tape */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); z-index: 30;
+            backdrop-filter: blur(2px);
+        }
+        .tape-1 { transform: translateX(-50%) rotate(-4deg); }
+        .tape-2 { transform: translateX(-50%) rotate(3deg); background-color: rgba(255, 204, 213, 0.85); }
 
         .polaroid {
-            background: #fff; padding: 8px 8px 16px 8px; 
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            width: 42vw; max-width: 160px; border-radius: 8px; 
+            background: #fff; padding: 8px 8px 18px 8px; 
+            box-shadow: 0 12px 25px rgba(255, 133, 162, 0.15);
+            width: 43vw; max-width: 170px; border-radius: 12px; 
             display: flex; flex-direction: column; align-items: center;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
-        }
-
-        .polaroid:hover {
-            transform: scale(1.1) rotate(0deg) !important;
-            box-shadow: 0 15px 30px rgba(255, 133, 162, 0.3); z-index: 20;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
         }
 
         .polaroid img {
-            width: 100%; height: 40vw; max-height: 150px;
-            object-fit: cover; border-radius: 5px;
+            width: 100%; height: 42vw; max-height: 160px;
+            object-fit: cover; border-radius: 8px;
         }
 
-        .polaroid p { margin-top: 10px; font-weight: bold; color: #ff85a2; font-size: clamp(0.8rem, 3vw, 1rem); }
+        .polaroid p { margin-top: 12px; font-weight: bold; color: #ff85a2; font-size: clamp(0.9rem, 3.5vw, 1.1rem); }
 
         .insta-link {
-            text-decoration: none; color: #d16b86; font-size: clamp(0.7rem, 2.5vw, 0.85rem);
-            margin-top: 5px; background: #ffe6ea; padding: 4px 10px;
-            border-radius: 20px; transition: all 0.3s ease; white-space: nowrap; 
+            text-decoration: none; color: #d16b86; font-size: clamp(0.75rem, 2.8vw, 0.9rem);
+            margin-top: 5px; background: #fff0f3; padding: 5px 12px;
+            border-radius: 20px; font-weight: 700;
         }
 
-        .insta-link:hover { background: #ff85a2; color: white; }
-
-        .shree { transform: rotate(-8deg); }
-        .shimi { transform: rotate(8deg); }
+        .shree { transform: rotate(-6deg); }
+        .shimi { transform: rotate(6deg); }
 
         .connecting-heart {
-            font-size: clamp(2rem, 8vw, 3.5rem); opacity: 0;
-            flex-shrink: 0; margin: 0 5px; filter: drop-shadow(0px 0px 10px rgba(255, 133, 162, 0.6));
+            font-size: clamp(2.5rem, 10vw, 4rem); opacity: 0;
+            flex-shrink: 0; margin: 0 -2vw; /* Pulls them slightly closer on mobile */
+            filter: drop-shadow(0px 0px 15px rgba(255, 133, 162, 0.7));
+            z-index: 25;
         }
 
         .checklist {
-            background: white; max-width: 350px; margin: 0 auto 30px auto;
-            padding: 20px; border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-            text-align: left; opacity: 0; border: 3px dashed #ffe6ea;
+            background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px);
+            max-width: 360px; width: 90vw; margin: 0 auto 30px auto;
+            padding: 25px 20px; border-radius: 25px; 
+            box-shadow: 0 15px 30px rgba(255, 133, 162, 0.1);
+            text-align: left; opacity: 0; border: 2px solid #ffe6ea;
         }
 
-        .checklist h3 { color: #ff85a2; text-align: center; margin-bottom: 15px; font-size: 1.4rem; }
+        .checklist h3 { color: #ff758c; text-align: center; margin-bottom: 18px; font-size: clamp(1.2rem, 5vw, 1.5rem); }
         .checklist ul { list-style: none; }
-        .checklist li { margin-bottom: 12px; font-size: 1.1rem; font-weight: bold; color: #d16b86; }
+        .checklist li { 
+            margin-bottom: 12px; font-size: clamp(0.95rem, 4vw, 1.1rem); 
+            font-weight: 700; color: #a07a82; 
+            display: flex; align-items: center; gap: 10px;
+        }
 
         .hug-btn {
-            background-color: #ffb6c1; color: white; border: none;
-            padding: 18px 35px; font-size: 1.3rem; font-family: 'Quicksand', sans-serif;
-            font-weight: bold; border-radius: 50px; cursor: pointer;
-            box-shadow: 0 8px 15px rgba(255, 182, 193, 0.6); margin-bottom: 20px; opacity: 0;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            color: #d16b86; border: none; padding: 18px 40px;
+            font-size: clamp(1.1rem, 4.5vw, 1.3rem); font-family: 'Quicksand', sans-serif;
+            font-weight: 800; border-radius: 50px; cursor: pointer;
+            box-shadow: 0 10px 25px rgba(255, 154, 158, 0.5); 
+            margin-bottom: 20px; opacity: 0;
+            animation: pulseBtn 2s infinite ease-in-out;
         }
 
-        .hug-btn:hover { transform: scale(1.05); background-color: #ff85a2; }
-        .hug-btn:active { transform: scale(0.9); }
+        @keyframes pulseBtn {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
 
         .dev-credit {
-            margin-top: 30px; font-size: 0.9rem; color: #d16b86;
+            margin-top: 20px; padding-bottom: 30px;
+            font-size: clamp(0.85rem, 3.5vw, 1rem); color: #d16b86;
             font-weight: bold; opacity: 0;
         }
 
-        /* ✨ CINEMATIC FLIGHT ANIMATIONS ✨ */
-        /* They start off-center (25vw away) so when scaled up they sit perfectly in the middle of the phone screen */
-        
-        @keyframes shreeFlight {
-            0% { opacity: 0; transform: translate(25vw, 15vh) scale(0); }
-            15% { opacity: 1; transform: translate(25vw, 15vh) scale(1.6); z-index: 50; }
-            25% { opacity: 1; transform: translate(25vw, 15vh) scale(1.7); z-index: 50; } /* Subtle heartbeat scale */
-            40% { opacity: 1; transform: translate(25vw, 15vh) scale(1.6); z-index: 50; }
-            100% { opacity: 1; transform: translate(0, 0) scale(1); z-index: 10; }
-        }
-
-        @keyframes shimiFlight {
-            0% { opacity: 0; transform: translate(-25vw, 15vh) scale(0); }
-            15% { opacity: 1; transform: translate(-25vw, 15vh) scale(1.6); z-index: 50; }
-            25% { opacity: 1; transform: translate(-25vw, 15vh) scale(1.7); z-index: 50; } /* Subtle heartbeat scale */
-            40% { opacity: 1; transform: translate(-25vw, 15vh) scale(1.6); z-index: 50; }
-            100% { opacity: 1; transform: translate(0, 0) scale(1); z-index: 10; }
+        /* ✨ MOBILE OPTIMIZED CINEMATIC FLIGHT ✨ */
+        /* Photos zoom directly into the center first, then drop into place perfectly */
+        @keyframes photoFlight {
+            0% { opacity: 0; transform: translateY(20vh) scale(0); z-index: 50; }
+            40% { opacity: 1; transform: translateY(10vh) scale(1.5); z-index: 50; }
+            50% { opacity: 1; transform: translateY(10vh) scale(1.5); z-index: 50; } /* Hover pause */
+            100% { opacity: 1; transform: translateY(0) scale(1); z-index: 10; }
         }
 
         @keyframes heartFlight {
-            0% { opacity: 0; transform: translateY(15vh) scale(0); }
-            30% { opacity: 1; transform: translateY(15vh) scale(3); filter: drop-shadow(0 0 20px #ff85a2);}
-            60% { opacity: 1; transform: translateY(15vh) scale(2.5); filter: drop-shadow(0 0 10px #ff85a2);}
-            100% { opacity: 1; transform: translate(0, 0) scale(1); }
+            0% { opacity: 0; transform: translateY(10vh) scale(0); }
+            40% { opacity: 1; transform: translateY(10vh) scale(2.5); filter: drop-shadow(0 0 25px #ff758c);}
+            60% { opacity: 1; transform: translateY(10vh) scale(2); filter: drop-shadow(0 0 15px #ff758c);}
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* Bottom UI popping up at the end */
-        .animate-bounce-up { animation: bounceUp 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
-        .animate-pop-btn { animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.3s; }
-        .animate-credit { animation: bounceUp 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.6s; }
+        .animate-up { animation: floatUpUi 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        
+        @keyframes floatUpUi { 0% { opacity: 0; transform: translateY(40px); } 100% { opacity: 1; transform: translateY(0); } }
 
-        @keyframes bounceUp { 0% { opacity: 0; transform: translateY(50px); } 100% { opacity: 1; transform: translateY(0); } }
-        @keyframes popIn { 0% { opacity: 0; transform: scale(0.5); } 100% { opacity: 1; transform: scale(1); } }
-
-        /* Wavy Floating Hearts generated by Send Hug JS */
         .floating-heart {
-            position: fixed; bottom: -50px; font-size: 2rem;
-            animation: floatUpWavy 4s ease-in forwards; pointer-events: none; z-index: 50;
+            position: fixed; bottom: -50px; font-size: clamp(2rem, 8vw, 3rem);
+            animation: floatUpWavy 4s ease-in forwards; pointer-events: none; z-index: 80;
         }
 
         @keyframes floatUpWavy {
             0% { transform: translateY(0) translateX(0) scale(1) rotate(0deg); opacity: 1; }
-            33% { transform: translateY(-30vh) translateX(-30px) scale(1.2) rotate(-15deg); }
-            66% { transform: translateY(-60vh) translateX(30px) scale(1.4) rotate(15deg); opacity: 0.8; }
-            100% { transform: translateY(-100vh) translateX(-20px) scale(1.5) rotate(-10deg); opacity: 0; }
+            50% { transform: translateY(-50vh) translateX(clamp(-20px, -5vw, -40px)) scale(1.2) rotate(-15deg); opacity: 0.9; }
+            100% { transform: translateY(-110vh) translateX(clamp(20px, 5vw, 40px)) scale(1.5) rotate(15deg); opacity: 0; }
         }
 
     </style>
@@ -326,16 +274,15 @@
     </audio>
 
     <div id="intro-screen">
-        <div id="bubble-container"></div>
         <div class="glass-panel">
             <h2 class="intro-title">Shree &<br>Shimi</h2>
-            <p class="intro-text">Ready to unlock our world?</p>
+            <p class="intro-text">Ready to unlock our world? ✨</p>
             <div class="thread-wrapper">
                 <div class="thread-container" id="thread" onclick="pullThread()">
                     <div class="thread-line"></div>
                     <div class="thread-heart">💖</div>
                 </div>
-                <div class="pull-hint">Pull me! 🥺</div>
+                <div class="pull-hint">Pull me!</div>
             </div>
         </div>
     </div>
@@ -350,20 +297,22 @@
 
         <div class="photo-container">
             <div class="anim-wrapper" id="shree-wrapper">
+                <div class="washi-tape tape-1"></div>
                 <div class="polaroid shree">
                     <img src="1.jpg" alt="Shree">
                     <p>Shree ✨</p>
-                    <a href="https://instagram.com/ifw.shree" target="_blank" class="insta-link">📸 @ifw.shree</a>
+                    <div class="insta-link">📸 @ifw.shree</div>
                 </div>
             </div>
             
             <div class="connecting-heart" id="conn-heart">💖</div>
 
             <div class="anim-wrapper" id="shimi-wrapper">
+                <div class="washi-tape tape-2"></div>
                 <div class="polaroid shimi">
                     <img src="2.png" alt="Shimi">
                     <p>Shimi 💅</p>
-                    <a href="https://instagram.com/simraaan_24" target="_blank" class="insta-link">📸 @simraaan_24</a>
+                    <div class="insta-link">📸 @simraaan_24</div>
                 </div>
             </div>
         </div>
@@ -371,10 +320,10 @@
         <div class="checklist" id="ldr-kit">
             <h3>LDR Bestie Survival Kit 🎒</h3>
             <ul>
-                <li>✅ Sharing outfit checks before going out</li>
-                <li>✅ Sending random TikToks/Reels</li>
-                <li>✅ Missing each other 24/7</li>
-                <li>✅ Planning the ultimate meetup</li>
+                <li>💕 <span>Sharing outfit checks before going out</span></li>
+                <li>💕 <span>Sending random TikToks/Reels</span></li>
+                <li>💕 <span>Missing each other 24/7</span></li>
+                <li>💕 <span>Planning the ultimate meetup</span></li>
             </ul>
         </div>
 
@@ -386,40 +335,24 @@
     </div>
 
     <script>
-        // Intro background bubbles
-        const bubbleContainer = document.getElementById('bubble-container');
-        for(let i = 0; i < 15; i++) {
-            let bubble = document.createElement('div');
-            bubble.classList.add('bg-bubble');
-            let size = Math.random() * 60 + 20 + 'px';
-            bubble.style.width = size; bubble.style.height = size;
-            bubble.style.left = Math.random() * 100 + 'vw';
-            bubble.style.animationDuration = Math.random() * 5 + 5 + 's';
-            bubble.style.animationDelay = Math.random() * 5 + 's';
-            bubbleContainer.appendChild(bubble);
-        }
-
-        // --- TRAVEL SYSTEM ---
+        // TRAVEL SYSTEM
         const cloudContainer = document.getElementById('cloud-container');
-        const travelEmojis = ['☁️', '☁️', '☁️', '☁️', '✨', '💖', '🦋'];
+        const travelEmojis = ['☁️', '☁️', '☁️', '☁️', '✨', '💖', '🌸'];
         let travelInterval;
 
         function spawnTravelItem() {
             const item = document.createElement('div');
             item.innerHTML = travelEmojis[Math.floor(Math.random() * travelEmojis.length)];
             item.className = 'travel-item';
-            
-            // Send them flying in random directions away from center
             const angle = Math.random() * Math.PI * 2;
             const distance = 100 + Math.random() * 50; 
             item.style.setProperty('--end-x', Math.cos(angle) * distance + 'vw');
             item.style.setProperty('--end-y', Math.sin(angle) * distance + 'vh');
-            
             cloudContainer.appendChild(item);
             setTimeout(() => item.remove(), 2500);
         }
 
-        // --- TYPEWRITER SYSTEM ---
+        // TYPEWRITER SYSTEM
         const titleArray = Array.from("Shreeee & Shimiiiiii 😝");
         const subArray = Array.from("Miles apart but close at heart ✈️💖");
         let tIdx = 0; let sIdx = 0;
@@ -428,9 +361,9 @@
             if (tIdx < titleArray.length) {
                 document.getElementById('typed-title').innerHTML += titleArray[tIdx];
                 tIdx++;
-                setTimeout(typeTitle, 100);
+                setTimeout(typeTitle, 90);
             } else {
-                setTimeout(typeSub, 300);
+                setTimeout(typeSub, 200);
             }
         }
 
@@ -438,77 +371,75 @@
             if (sIdx < subArray.length) {
                 document.getElementById('typed-sub').innerHTML += subArray[sIdx];
                 sIdx++;
-                setTimeout(typeSub, 50);
+                setTimeout(typeSub, 40);
             } else {
-                // Done typing, hide cursor
                 document.getElementById('main-cursor').style.display = 'none';
             }
         }
 
-        // --- THE MAIN DIRECTOR ---
+        // MASTER ANIMATION CONTROLLER
         function pullThread() {
             const thread = document.getElementById('thread');
-            thread.style.transform = "translateY(50px) scale(0.8)";
+            thread.style.transform = "translateY(40px) scale(0.9)";
             
             setTimeout(() => {
-                // 1. Audio & Screen Transition
                 const music = document.getElementById('bg-music');
-                music.play().catch(error => console.log("Audio play blocked by browser."));
+                music.play().catch(() => console.log("Audio play blocked."));
+                
                 document.getElementById('intro-screen').classList.add('pulled');
                 document.getElementById('main-content').classList.add('visible');
                 
-                // 2. Start zooming through clouds!
-                travelInterval = setInterval(spawnTravelItem, 120);
+                travelInterval = setInterval(spawnTravelItem, 100); // Faster clouds!
 
-                // 3. Shree flies in
+                // Shree zooms into center then to left
                 setTimeout(() => {
                     let sWrap = document.getElementById('shree-wrapper');
-                    sWrap.style.opacity = '1';
-                    sWrap.style.animation = 'shreeFlight 2.2s cubic-bezier(0.25, 1, 0.5, 1) forwards';
-                }, 500);
+                    sWrap.style.animation = 'photoFlight 2s cubic-bezier(0.25, 1, 0.5, 1) forwards';
+                }, 400);
 
-                // 4. Shimi flies in
+                // Shimi zooms into center then to right
                 setTimeout(() => {
                     let shWrap = document.getElementById('shimi-wrapper');
-                    shWrap.style.opacity = '1';
-                    shWrap.style.animation = 'shimiFlight 2.2s cubic-bezier(0.25, 1, 0.5, 1) forwards';
-                }, 2500);
+                    shWrap.style.animation = 'photoFlight 2s cubic-bezier(0.25, 1, 0.5, 1) forwards';
+                }, 2000);
 
-                // 5. Heart flies in & stop clouds
+                // Heart zooms into center
                 setTimeout(() => {
                     let heart = document.getElementById('conn-heart');
-                    heart.style.opacity = '1';
                     heart.style.animation = 'heartFlight 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards';
-                    clearInterval(travelInterval); // Stop spawning clouds
-                }, 4500);
+                    clearInterval(travelInterval); 
+                }, 3800);
 
-                // 6. Restore scrolling and start typing
+                // Start typing
                 setTimeout(() => {
                     document.body.style.overflowY = 'auto';
                     typeTitle();
-                }, 6000);
+                }, 5200);
 
-                // 7. Pop up the UI at the bottom
+                // Reveal bottom UI
                 setTimeout(() => {
-                    document.getElementById('ldr-kit').classList.add('animate-bounce-up');
-                    document.getElementById('hug-button').classList.add('animate-pop-btn');
-                    document.getElementById('credit-text').classList.add('animate-credit');
-                }, 8000);
+                    document.getElementById('ldr-kit').classList.add('animate-up');
+                    document.getElementById('hug-button').classList.add('animate-up');
+                    document.getElementById('hug-button').style.animationDelay = "0.2s";
+                    document.getElementById('credit-text').classList.add('animate-up');
+                    document.getElementById('credit-text').style.animationDelay = "0.4s";
+                }, 7500);
 
             }, 250); 
         }
 
+        // VIRTUAL HUG BUTTON
         function sendHug() {
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < 12; i++) {
                 setTimeout(() => {
                     const heart = document.createElement('div');
-                    heart.innerHTML = ['💖', '✨', '🥺', '💕', '🦋'][Math.floor(Math.random() * 5)];
+                    heart.innerHTML = ['💖', '✨', '🥺', '💕', '🌸', '🦋'][Math.floor(Math.random() * 6)];
                     heart.className = 'floating-heart';
                     heart.style.left = (Math.random() * 80 + 10) + 'vw';
-                    heart.style.fontSize = (Math.random() * 1.5 + 1.5) + 'rem';
+                    heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
                     document.body.appendChild(heart);
-                    setTimeout(() => { heart.remove(); }, 4000);
-                }, i * 200);
+                    setTimeout(() => { heart.remove(); }, 5000);
+                }, i * 150);
             }
         }
     </script>
