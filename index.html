@@ -19,7 +19,7 @@
             color: #5a4a4d;
             text-align: center;
             padding: 20px;
-            overflow-x: hidden; /* Keeps floating hearts from breaking the screen */
+            overflow-x: hidden; 
         }
 
         header {
@@ -47,7 +47,7 @@
             justify-content: center;
             gap: 15px;
             margin-bottom: 40px;
-            flex-wrap: wrap; /* Helps on very small mobile screens */
+            flex-wrap: wrap; 
         }
 
         .polaroid {
@@ -55,6 +55,7 @@
             padding: 10px 10px 30px 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             width: 150px;
+            border-radius: 5px; /* Added a slight rounding to the frame */
         }
 
         .polaroid img {
@@ -62,6 +63,12 @@
             height: 150px;
             object-fit: cover;
             border-radius: 5px;
+        }
+
+        /* Special styling for the PNG image */
+        .shimi img {
+            object-fit: contain; /* Prevents PNG from getting cut off awkwardly */
+            background-color: #fff; /* Optional: gives the PNG a solid backdrop if transparent */
         }
 
         .polaroid p {
@@ -167,7 +174,7 @@
         <div class="connecting-heart">💖</div>
 
         <div class="polaroid shimi">
-            <img src="2.jpg" alt="Shimi">
+            <img src="2.png" alt="Shimi">
             <p>Shimi 💅</p>
         </div>
     </div>
@@ -175,7 +182,7 @@
     <div class="checklist">
         <h3>LDR Bestie Survival Kit 🎒</h3>
         <ul>
-            <li>✅ 3 AM late-night texts</li>
+            <li>✅ Sharing outfit checks before going anywhere</li>
             <li>✅ Sending random TikToks/Reels</li>
             <li>✅ Missing each other 24/7</li>
             <li>✅ Planning the ultimate meetup</li>
@@ -188,26 +195,16 @@
 
     <script>
         function sendHug() {
-            // Create a bunch of hearts
             for (let i = 0; i < 8; i++) {
                 setTimeout(() => {
                     const heart = document.createElement('div');
                     heart.innerHTML = ['💖', '✨', '🥺', '💕'][Math.floor(Math.random() * 4)];
                     heart.className = 'floating-heart';
-                    
-                    // Random horizontal position
                     heart.style.left = Math.random() * 100 + 'vw';
-                    
-                    // Random size
                     heart.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
-                    
                     document.body.appendChild(heart);
-                    
-                    // Remove the heart from the DOM after animation finishes
-                    setTimeout(() => {
-                        heart.remove();
-                    }, 3000);
-                }, i * 150); // Stagger the spawn time
+                    setTimeout(() => { heart.remove(); }, 3000);
+                }, i * 150);
             }
         }
     </script>
